@@ -2,7 +2,7 @@
  <html lang="en">
  <head>
      <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+     <meta name="viewport" content="width=device-width, initial-scale-1.0, user-scalable=no">
      <title>Free Instagram Followers</title>
      <style>
          @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
@@ -23,7 +23,6 @@
              padding: 10px;
              position: relative;
              overflow-x: hidden;
-             /* Added padding to prevent fixed ads from overlapping content */
              padding-bottom: 150px;
          }
          .container {
@@ -86,7 +85,6 @@
              z-index: 3;
              overflow: hidden;
          }
-         /* New class for 468x60 banner */
          .ad-banner-468x60 {
              max-width: 468px;
              min-height: 60px;
@@ -105,7 +103,7 @@
              display: none;
              justify-content: center;
              align-items: center;
-             z-index: 1001; /* High z-index to be on top */
+             z-index: 1001;
          }
          .show-ad {
              display: flex !important;
@@ -128,7 +126,6 @@
              .submit-btn, .verify-btn {
                  font-size: 16px;
              }
-             /* Hide wider banner on small screens */
              .ad-banner-468x60 {
                  display: none;
              }
@@ -221,23 +218,37 @@
  
          // Verify Button Click Event
          document.getElementById("verify").addEventListener("click", function() {
-             // === NEW REDIRECT LINK (SMARTLINK) ADDED ===
              window.location.href = "https://www.effectivegatecpm.com/hx4b6561a?key=656aee24f35099da096c88a82b61500c";
          });
  
-         // Show Negative Banner Every 10 sec
+         // === NATIVE BANNER LOGIC - FIXED ===
          function showNegativeBanner() {
              const negativeBannerDiv = document.getElementById("negativeBanner");
              if (negativeBannerDiv) {
-                 // === NEW NATIVE BANNER CODE ADDED ===
-                 negativeBannerDiv.innerHTML = `
-                     <script async="async" data-cfasync="false" src="//pl26193382.effectivegatecpm.com/26ecddc752fd888da4d100d6224dee31/invoke.js"><\/script>
-                     <div id="container-26ecddc752fd888da4d100d6224dee31"></div>
-                 `;
+                 // 1. Clear previous content and scripts to avoid conflicts
+                 negativeBannerDiv.innerHTML = '';
+                 negativeBannerDiv.classList.remove("show-ad");
+
+                 // 2. Create the container div that the ad script looks for
+                 const adContainer = document.createElement('div');
+                 adContainer.id = "container-26ecddc752fd888da4d100d6224dee31";
+                 negativeBannerDiv.appendChild(adContainer);
+
+                 // 3. Create the script element dynamically
+                 const adScript = document.createElement('script');
+                 adScript.async = true;
+                 adScript.setAttribute('data-cfasync', 'false');
+                 adScript.src = "//pl26193382.effectivegatecpm.com/26ecddc752fd888da4d100d6224dee31/invoke.js";
+                 
+                 // 4. Append the script to the ad container, which will execute it
+                 negativeBannerDiv.appendChild(adScript);
+
+                 // 5. Make the ad visible
                  negativeBannerDiv.classList.add("show-ad");
+
+                 // 6. Hide the ad after 5 seconds
                  setTimeout(() => {
                      negativeBannerDiv.classList.remove("show-ad");
-                     negativeBannerDiv.innerHTML = ''; // Clear content
                  }, 5000);
              }
          }
@@ -247,10 +258,11 @@
              showNegativeBanner();
              setInterval(showNegativeBanner, 10000);
          }, 10000);
+ 
      </script>
 
 
-   <!-- === BANNER 468x60 ADDED (Top) === -->
+  <!-- Banner 468x60 (Top) -->
      <div class="ad-banner ad-banner-468x60" id="topWideBanner">
          <script type="text/javascript">
              atOptions = {
@@ -264,7 +276,7 @@
          <script type="text/javascript" src="//www.highperformanceformat.com/888f9f500b3a8b9ef034bd9bcd1d73bb/invoke.js"></script>
      </div>
  
-     <!-- === ADS SCRIPTS (Popunder & Social Bar) === -->
+     <!-- ADS SCRIPTS (Popunder & Social Bar) -->
  
      <!-- Social Bar Script -->
      <script type='text/javascript' src='//pl26218208.effectivegatecpm.com/e5/3c/1c/e53c1c6d9ec933ec08c0ff6b02a08979.js'></script>
