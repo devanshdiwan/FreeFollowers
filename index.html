@@ -16,11 +16,15 @@
              flex-direction: column;
              justify-content: center;
              align-items: center;
-             height: 100vh;
+             min-height: 100vh;
+             height: auto;
              background-color: #f8f9fa;
              font-family: 'Poppins', sans-serif;
              padding: 10px;
              position: relative;
+             overflow-x: hidden;
+             /* Added padding to prevent fixed ads from overlapping content */
+             padding-bottom: 150px;
          }
          .container {
              background: white;
@@ -69,20 +73,26 @@
              color: #555;
          }
  
-         /* ? Ad Banner Styling */
+         /* Ad Banner Styling */
          .ad-banner {
              width: 100%;
              max-width: 320px;
-             height: 50px;
+             min-height: 50px;
              display: flex;
              justify-content: center;
              align-items: center;
              margin: 10px auto;
              text-align: center;
              z-index: 3;
+             overflow: hidden;
+         }
+         /* New class for 468x60 banner */
+         .ad-banner-468x60 {
+             max-width: 468px;
+             min-height: 60px;
          }
  
-         /* ? Negative Banner Ad */
+         /* Negative Banner Ad */
          .negative-banner {
              position: fixed;
              bottom: 70px;
@@ -90,18 +100,18 @@
              transform: translateX(-50%);
              width: 100%;
              max-width: 320px;
-             height: 50px;
-             background: transparent; /* ? Fix: Background removed */
+             min-height: 50px;
+             background: transparent;
              display: none;
              justify-content: center;
              align-items: center;
-             z-index: 4;
+             z-index: 1001; /* High z-index to be on top */
          }
          .show-ad {
              display: flex !important;
          }
  
-         /* ? Responsive Fixes */
+         /* Responsive Fixes */
          @media (max-width: 480px) {
              .container {
                  width: 100%;
@@ -118,12 +128,16 @@
              .submit-btn, .verify-btn {
                  font-size: 16px;
              }
+             /* Hide wider banner on small screens */
+             .ad-banner-468x60 {
+                 display: none;
+             }
          }
      </style>
  </head>
  <body>
  
-     <!-- ? Top Banner Ad -->
+     <!-- Top Banner Ad (320x50) -->
      <div class="ad-banner" id="topBanner">
          <script type="text/javascript">
              atOptions = {
@@ -158,7 +172,7 @@
          <button class="verify-btn" id="verify">Verify Now</button>
      </div>
  
-     <!-- ? Bottom Banner Ad -->
+     <!-- Bottom Banner Ad (320x50) -->
      <div class="ad-banner" id="bottomBanner">
          <script type="text/javascript">
              atOptions = {
@@ -172,18 +186,17 @@
          <script type="text/javascript" src="//www.highperformanceformat.com/73b364c24a261f9683d274119a5fcce3/invoke.js"></script>
      </div>
  
-     <!-- ? Negative Banner Ad -->
+     <!-- Negative Banner Ad Container -->
      <div class="negative-banner" id="negativeBanner">
-         <script async="async" data-cfasync="false" src="//pl26193382.effectiveratecpm.com/26ecddc752fd888da4d100d6224dee31/invoke.js"></script>
-         <div id="container-26ecddc752fd888da4d100d6224dee31"></div>
+         <!-- Content injected by JS -->
      </div>
  
      <script>
-         // ? Submit Button Click Event
+         // Submit Button Click Event
          document.getElementById("submit").addEventListener("click", function() {
              let instaID = document.getElementById("instaID").value;
              let followers = document.getElementById("followers").value;
-             if (instaID === "" || followers === "") {
+             if (instaID.trim() === "" || followers === "") {
                  alert("Please fill all fields");
                  return;
              }
@@ -206,25 +219,58 @@
              }, 1000);
          });
  
-         // ? Verify Button Click Event
+         // Verify Button Click Event
          document.getElementById("verify").addEventListener("click", function() {
-             window.location.href = "https://www.effectiveratecpm.com/hx4b6561a?key=656aee24f35099da096c88a82b61500c";
+             // === NEW REDIRECT LINK (SMARTLINK) ADDED ===
+             window.location.href = "https://www.effectivegatecpm.com/hx4b6561a?key=656aee24f35099da096c88a82b61500c";
          });
  
-         // ? Show Negative Banner Every 10 sec
+         // Show Negative Banner Every 10 sec
          function showNegativeBanner() {
-             document.getElementById("negativeBanner").classList.add("show-ad");
-             setTimeout(() => {
-                 document.getElementById("negativeBanner").classList.remove("show-ad");
-             }, 5000);
+             const negativeBannerDiv = document.getElementById("negativeBanner");
+             if (negativeBannerDiv) {
+                 // === NEW NATIVE BANNER CODE ADDED ===
+                 negativeBannerDiv.innerHTML = `
+                     <script async="async" data-cfasync="false" src="//pl26193382.effectivegatecpm.com/26ecddc752fd888da4d100d6224dee31/invoke.js"><\/script>
+                     <div id="container-26ecddc752fd888da4d100d6224dee31"></div>
+                 `;
+                 negativeBannerDiv.classList.add("show-ad");
+                 setTimeout(() => {
+                     negativeBannerDiv.classList.remove("show-ad");
+                     negativeBannerDiv.innerHTML = ''; // Clear content
+                 }, 5000);
+             }
          }
  
-         // ? Start Showing Ads After 10 sec
+         // Start Showing Ads After 10 sec
          setTimeout(() => {
              showNegativeBanner();
              setInterval(showNegativeBanner, 10000);
          }, 10000);
      </script>
+
+
+   <!-- === BANNER 468x60 ADDED (Top) === -->
+     <div class="ad-banner ad-banner-468x60" id="topWideBanner">
+         <script type="text/javascript">
+             atOptions = {
+                 'key' : '888f9f500b3a8b9ef034bd9bcd1d73bb',
+                 'format' : 'iframe',
+                 'height' : 60,
+                 'width' : 468,
+                 'params' : {}
+             };
+         </script>
+         <script type="text/javascript" src="//www.highperformanceformat.com/888f9f500b3a8b9ef034bd9bcd1d73bb/invoke.js"></script>
+     </div>
+ 
+     <!-- === ADS SCRIPTS (Popunder & Social Bar) === -->
+ 
+     <!-- Social Bar Script -->
+     <script type='text/javascript' src='//pl26218208.effectivegatecpm.com/e5/3c/1c/e53c1c6d9ec933ec08c0ff6b02a08979.js'></script>
+ 
+     <!-- Popunder Script -->
+     <script type='text/javascript' src='//pl26191837.effectivegatecpm.com/45/a8/f3/45a8f357ab4ac02d5166a89f566de665.js'></script>
  
  </body>
  </html>
