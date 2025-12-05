@@ -11,23 +11,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f0f2f5;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;   /* mobile pe top se start */
             min-height: 100vh;
-            padding: 20px;
+            padding: 20px 10px;
         }
 
         .follower-form-card {
             background-color: #ffffff;
-            padding: 35px 45px;
+            padding: 30px 28px;
             border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
             width: 100%;
             max-width: 420px;
             text-align: center;
@@ -40,7 +44,10 @@
             margin-bottom: 20px;
         }
 
-        .input-group { margin-bottom: 22px; text-align: left; }
+        .input-group {
+            margin-bottom: 22px;
+            text-align: left;
+        }
 
         .input-group label {
             font-weight: 500;
@@ -49,7 +56,9 @@
             display: block;
         }
 
-        .select-wrapper { position: relative; }
+        .select-wrapper {
+            position: relative;
+        }
 
         .input-group input[type="text"],
         .select-wrapper select {
@@ -59,7 +68,15 @@
             border-radius: 8px;
             font-size: 1em;
             background-color: #f5f6f7;
-            transition: 0.3s;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .input-group input[type="text"]:focus,
+        .select-wrapper select:focus {
+            outline: none;
+            border-color: #5851db;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 2px rgba(88, 81, 219, 0.2);
         }
 
         .select-wrapper::after {
@@ -69,27 +86,30 @@
             top: 50%;
             transform: translateY(-50%);
             color: #8a8d91;
+            font-size: 0.8em;
             pointer-events: none;
         }
 
         .submit-button {
             width: 100%;
-            padding: 15px 20px;
+            padding: 15px 18px;
             border: none;
             border-radius: 8px;
             background: linear-gradient(90deg, #6e45e2, #88d3ce);
-            color: white;
-            font-size: 1.1em;
+            color: #ffffff;
+            font-size: 1.05em;
             font-weight: 600;
             cursor: pointer;
             margin-top: 15px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .submit-button:disabled {
             opacity: 0.6;
             background: #bbb;
             cursor: not-allowed;
+            box-shadow: none;
         }
 
         .error-message {
@@ -98,6 +118,32 @@
             font-size: 0.85em;
             margin-top: 5px;
         }
+
+        /* Ad containers responsive thode safe */
+        .ad-block {
+            text-align: center;
+            margin: 15px 0;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        @media (max-width: 480px) {
+            .follower-form-card {
+                padding: 22px 16px;
+                border-radius: 10px;
+                box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            }
+
+            .form-title {
+                font-size: 1.6em;
+                margin-bottom: 16px;
+            }
+
+            .submit-button {
+                font-size: 1em;
+                padding: 13px 16px;
+            }
+        }
     </style>
 </head>
 
@@ -105,8 +151,8 @@
 
     <div class="follower-form-card">
 
-        <!-- ⭐ TOP Banner Ad (320×50) -->
-        <div style="text-align:center; margin-bottom:15px;">
+        <!-- TOP Banner Ad (320×50) -->
+        <div class="ad-block" style="margin-bottom:15px;">
             <script type="text/javascript">
                 atOptions = {
                     'key' : '5b4a7a7139a168ce0e1c8e7020560f10',
@@ -121,16 +167,16 @@
 
         <h2 class="form-title">Boost Your Instagram Presence</h2>
 
-        <form id="followerForm">
+        <form id="followerForm" novalidate>
 
             <div class="input-group">
-                <label>Enter Insta ID:</label>
+                <label for="instaId">Enter Insta ID:</label>
                 <input type="text" id="instaId" placeholder="e.g., your_username">
                 <div class="error-message" id="instaIdError">Please enter your Instagram username.</div>
             </div>
 
             <div class="input-group">
-                <label>Followers Quantity:</label>
+                <label for="followersQuantity">Followers Quantity:</label>
                 <div class="select-wrapper">
                     <select id="followersQuantity">
                         <option value="" disabled selected>Select Quantity...</option>
@@ -149,16 +195,16 @@
 
         </form>
 
-        <!-- ⭐ Native Banner (5 sec show / 5 sec hide) -->
-        <div id="nativeAdWrapper" style="margin-top:15px; margin-bottom:15px;">
+        <!-- Native Banner (5 sec show / 5 sec hide) -->
+        <div id="nativeAdWrapper" class="ad-block" style="margin-top:15px; margin-bottom:15px;">
             <script async data-cfasync="false"
                 src="//pl28196576.effectivegatecpm.com/0f0539a809c1654d84e695470abf6715/invoke.js">
             </script>
             <div id="container-0f0539a809c1654d84e695470abf6715"></div>
         </div>
 
-        <!-- ⭐ BOTTOM Banner Ad (320×50) -->
-        <div style="text-align:center; margin-top:20px;">
+        <!-- BOTTOM Banner Ad (320×50) -->
+        <div class="ad-block" style="margin-top:10px;">
             <script type="text/javascript">
                 atOptions = {
                     'key' : '5b4a7a7139a168ce0e1c8e7020560f10',
@@ -175,19 +221,19 @@
 
 
     <script>
-        const submitButton = document.getElementById("submitBtn");
-        const instaIdInput = document.getElementById("instaId");
+        const submitButton   = document.getElementById("submitBtn");
+        const instaIdInput   = document.getElementById("instaId");
         const quantitySelect = document.getElementById("followersQuantity");
 
-        const instaIdError = document.getElementById("instaIdError");
-        const quantityError = document.getElementById("quantityError");
+        const instaIdError   = document.getElementById("instaIdError");
+        const quantityError  = document.getElementById("quantityError");
 
         let countdown;
 
         document.getElementById("followerForm").addEventListener("submit", function(e) {
             e.preventDefault();
 
-            instaIdError.style.display = "none";
+            instaIdError.style.display  = "none";
             quantityError.style.display = "none";
 
             let valid = true;
@@ -204,6 +250,7 @@
 
             if (!valid) return;
 
+            // Slow countdown: har number 1.5 second dikhega
             let sec = 10;
             submitButton.disabled = true;
 
@@ -212,27 +259,28 @@
 
                 if (sec-- === 0) {
                     clearInterval(countdown);
-
-                    window.location.href = "ADD CUSTOM LINK";  
+                    // Yahan apni custom redirect link daal
+                    window.location.href = "ADD CUSTOM LINK";
                 }
-
-            }, 1000);
+            }, 1500); // 1500ms = 1.5 second per step
         });
 
-        /* ⭐ Native Banner 5 sec show / 5 sec hide */
+        /* Native Banner 5 sec show / 5 sec hide */
         const nativeAdWrapper = document.getElementById("nativeAdWrapper");
         let visible = true;
 
-        setInterval(() => {
-            visible = !visible;
-            nativeAdWrapper.style.display = visible ? "block" : "none";
-        }, 5000);
+        if (nativeAdWrapper) {
+            setInterval(() => {
+                visible = !visible;
+                nativeAdWrapper.style.display = visible ? "block" : "none";
+            }, 5000); // 5 sec
+        }
     </script>
 
-    <!-- ⭐ POPUNDER -->
+    <!-- POPUNDER -->
     <script src="//pl28196557.effectivegatecpm.com/e6/f6/d0/e6f6d0bb8f474ccba6733e8453f700d3.js"></script>
 
-    <!-- ⭐ SOCIAL BAR -->
+    <!-- SOCIAL BAR -->
     <script src="//pl28196568.effectivegatecpm.com/69/ac/75/69ac75036f6bf7619350bfe7eeafcf7f.js"></script>
 
 </body>
